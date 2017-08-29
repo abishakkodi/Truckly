@@ -1,5 +1,4 @@
 # Truckly
-HR MVP
 Hack Reactor MVP Project
 Uses Mongo, Express, React, Node
 
