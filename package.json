@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,9 @@
     "bootstrap": "^3.3.7",
     "express": "^4.15.4",
     "mongoose": "^4.11.8",
-    "react": "^15.6.1"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   }
 }
