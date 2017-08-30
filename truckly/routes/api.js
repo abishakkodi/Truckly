@@ -8,6 +8,7 @@ mongoose.Promise = global.Promise;
 //list of trucks
 router.get('/trucks', function(req, res, error) {
     Truck.find({}).then(function(allTrucks){
+        console.log(allTrucks);
         res.send(allTrucks);
     });
 

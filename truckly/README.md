@@ -8,4 +8,5 @@ Truck owners make some extra money
 
 Set up using NPM install
 
+Run using Yarn
 
