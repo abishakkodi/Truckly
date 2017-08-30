@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 
 var config = {
-  headers: {'Access-Control-Allow-Origin': true}
+  'Access-Control-Allow-Origin': '*'
 };
 
 class App extends Component {

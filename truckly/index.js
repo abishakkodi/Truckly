@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 
 const options = { promiseLibrary: require('bluebird') };
 
+const cors = require('cors');
+
 //set up express
 var app = express();
 var port = 4001;
@@ -19,6 +21,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('MONGO CONNECTED!');
 });
+
+app.use(cors({origin: 'http://localhost:4000'}));
 
 //First middleware hit
 app.use(express.static('client'));
