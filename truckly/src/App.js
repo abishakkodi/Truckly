@@ -1,45 +1,82 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
+import Posts from './Components/Posts.js';
+import Signups from './Components/Signups.js';
 
-var config = {
-  'Access-Control-Allow-Origin': '*'
-};
+const axios = require('axios');
+
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: []
+      trucks: [],
+      rentalInfo: true
     }
   }
 
+  fetchNewData = () => {
+     axios.get('http://localhost:4001/api/trucks')
+    .then(
+      (res) => {
+          this.setState({trucks: res.data});
+      })
+    .then(() => {
 
-  componentDidMount(){
-    axios.get('http://localhost:4001/api/trucks', config ).then(
-      (data) => {
-        console.log(data);
-      }).catch(()=> {
+     console.log(this.state.trucks);
+
+    })
+    .catch((error)=> {
         console.log('Error getting data');
+        console.log(error);
       });
   }
 
+  componentDidMount = () => {
+    axios.get('http://localhost:4001/api/trucks')
+    .then(
+      (res) => {
+          this.setState({trucks: res.data});
+      })
+    .then(() => {
 
-  render() {
+     console.log(this.state.trucks);
+
+    })
+    .catch((error)=> {
+        console.log('Error getting data');
+        console.log(error);
+      });
+
+
+  }
+
+  toggleRent = () => {
+    this.setState({rentalInfo: true});
+  }
+
+  togglePost = () => {
+    this.setState({rentalInfo: false});
+  }
+
+  render = () => {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h2> Truckly: Smarter Truck Rentals </h2>
+       <section className="container">
+    <div className="one" onClick={this.toggleRent}> Rent </div>
+    <div className="two" onClick={this.togglePost}> Post </div>
+</section>
+
+        {this.state.rentalInfo? <Posts data={this.state.trucks}/> : <Signups />}
       </div>
     );
   }
 }
+
+
+
+
 
 export default App;
