@@ -1,9 +1,11 @@
 const React = require('react');
 const _ = require('underscore');
+const axios = require('axios');
 
 class Signups extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       "brand": '',
       "model": '',
@@ -12,22 +14,41 @@ class Signups extends React.Component {
       "price": '',
       "picture": '',
       "location": '',
-      "invalidFormat":false
+      "invalidFormat":false,
+      "submitted": false
+
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeOfState = this.handleChangeOfState.bind(this);
+
   }
 
   capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  addToMongo = (obj) => {
-
+  ignoredKeys = () => {
+    const ignored = ["invalidFormat", "submitted"];
+    return ignored;
 
   }
 
-  handleChange = (e) => {
+  addToMongo = (obj) => {
+    axios.post('http://localhost:4001/api/trucks', obj)
+    .then((response)=>{
+      console.log(' Added to Mongo');
+      console.log(response);
+    })
+    .catch((error)=> {
+      console.log('Ya done goofed');
+      console.log(error);
+    });
+
+    console.log(obj);
+
+  }
+
+  handleChangeOfState = (e) => {
     e.preventDefault();
     var key = e.target.name;
     var obj = {};
@@ -41,13 +62,16 @@ class Signups extends React.Component {
 
   submitData = (e) => {
     e.preventDefault();
-    console.log(this.validateInput());
+    if(this.validateInput()) {
+      this.addToMongo(_.omit(this.state, this.ignoredKeys()));
+    } else {
+      this.invalidate();
+    }
 
   }
 
   validateInput = () => {
-    var validator = true;
-    var filteredStateObj = _.omit(this.state,["invalidFormat"]);
+    var filteredStateObj = _.omit(this.state,this.ignoredKeys());
     var filteredInput = _.values(filteredStateObj);
 
     if(_.contains(filteredInput, '')) {
@@ -58,14 +82,13 @@ class Signups extends React.Component {
       return false;
     }
 
-
     return true;
   }
 
   render = () => {
 
     var unfilteredKeys = _.keys(this.state);
-    var filter =["invalidFormat"]; //add the items you want filtered out of keys here
+    var filter =this.ignoredKeys(); //add the items you want filtered out of keys here
     var keys = _.filter(unfilteredKeys, (descriptor) => {
       return !filter.includes(descriptor);
     });
@@ -86,7 +109,7 @@ class Signups extends React.Component {
                       <div className='one'>{this.capitalize(key)}:</div>
 
                       <div className='two'>
-                      <input type='text' placeholder={key} value={this.state.key} onChange={this.handleChange} name={key}/>
+                      <input type='text' placeholder={key} value={this.state.key} onChange={this.handleChangeOfState} name={key}/>
                       </div>
 
                       </section>

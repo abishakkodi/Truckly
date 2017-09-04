@@ -1,6 +1,11 @@
 .App {
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+
 }
+
+
+
 
 .container {
     width: 80%;
@@ -31,4 +36,9 @@
 
 .invalid {
   color: red;
+}
+
+.entry {
+  border-color: black;
+  border-style: solid;
 }

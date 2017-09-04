@@ -8,11 +8,13 @@ class Posts extends React.Component {
     return(
       <div>
         <h3>
-          Posts Component
+          Trucks Available
+        </h3>
+        <div>
           {this.props.data.map((truck) => <PostEntry key={truck._id} info={truck}/>
           )
         }
-        </h3>
+        </div>
       </div>);
   }
 
