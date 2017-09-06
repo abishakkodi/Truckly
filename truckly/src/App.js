@@ -63,7 +63,7 @@ class App extends Component {
   render = () => {
     return (
       <div className="App">
-        <h2> Truckly: Smarter Truck Rentals </h2>
+        <h2 className="title"> Truckly: Smarter Truck Rentals </h2>
        <section className="container">
     <div className="one" onClick={this.toggleRent}> Rent </div>
     <div className="two" onClick={this.togglePost}> Post </div>

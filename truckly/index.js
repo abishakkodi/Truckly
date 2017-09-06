@@ -22,9 +22,10 @@ db.once('open', function() {
   console.log('MONGO CONNECTED!');
 });
 
+//First middleware hit, used for CORS
 app.use(cors({origin: 'http://localhost:4000'}));
 
-//First middleware hit
+//
 app.use(express.static('client'));
 
 

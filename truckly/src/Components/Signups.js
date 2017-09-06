@@ -95,7 +95,7 @@ class Signups extends React.Component {
 
     return (
         <div>
-          <h2>
+          <h2 className="signupTitle">
             Sign Up for Truckly!
           </h2>
             {this.state.invalidFormat? <div className='invalid'>Please Use a valid format </div> : null}
@@ -116,7 +116,9 @@ class Signups extends React.Component {
                     </div>)
                 })
               }
-              <input type='Submit' defaultValue='Submit Post'/>
+              <div className="signupTitle">
+               <input type='Submit' defaultValue='Submit Post'/>
+              </div>
             </form>
         </div>
     );
